@@ -33,14 +33,21 @@ public class LeanTweenTest : MonoBehaviour
     {
         animator.Play("ending squash and stretch");
         Debug.Log("enter");
+        StartCoroutine(StopAnim());
     }
 
-    private void OnTriggerExit(Collider other)
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    animator.Play("default");
+    //    Debug.Log("exit");
+    //}
+
+    IEnumerator StopAnim()
     {
+        yield return new WaitForSeconds(1);
         animator.Play("default");
         Debug.Log("exit");
     }
-
 
 
 
