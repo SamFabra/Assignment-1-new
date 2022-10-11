@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LeanTweenTest : MonoBehaviour
 {
+    public Transform originPoint;
     public Transform endPoint; 
     private float desiredTime = 10f;
 
@@ -13,8 +14,9 @@ public class LeanTweenTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        LeanTween.moveX(gameObject, endPoint.position.x, 3).setEaseInOutBack().setLoopPingPong();
+
+        //LeanTween.moveX(gameObject, endPoint.position.x, 3).setEaseInOutQuad().setLoopPingPong();
+        LeanTween.moveY(gameObject, 4, 0.5f).setEaseLinear().setLoopPingPong();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class LeanTweenTest : MonoBehaviour
         elapsedTime += Time.smoothDeltaTime;
         float t = elapsedTime / desiredTime;
 
+        transform.position = Vector3.Lerp(originPoint.position, endPoint.position, t);
         //transform.localScale = Vector3.Lerp(transform.localScale.z, transform.localScale.z / 2, t);
     }
 }
