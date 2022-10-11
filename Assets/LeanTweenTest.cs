@@ -10,15 +10,13 @@ public class LeanTweenTest : MonoBehaviour
 
     public Transform originPoint;
     public Transform endPoint; 
-    private float desiredTime = 10f;
-
-    [Range(0.0f, 10.0f)]
-    public float elapsedTime;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+
+        //Lerp and Easing
         LeanTween.moveX(gameObject, endPoint.position.x, 3).setEaseLinear().setLoopPingPong();
         LeanTween.moveY(gameObject, 4, 0.5f).setEaseInOutSine().setLoopPingPong();
     }
@@ -35,12 +33,6 @@ public class LeanTweenTest : MonoBehaviour
         Debug.Log("enter");
         StartCoroutine(StopAnim());
     }
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    animator.Play("default");
-    //    Debug.Log("exit");
-    //}
 
     IEnumerator StopAnim()
     {
