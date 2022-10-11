@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class LeanTweenTest : MonoBehaviour
 {
+    public GameObject cube;
+
+    public Animator animator;
+
     public Transform originPoint;
     public Transform endPoint; 
     private float desiredTime = 10f;
@@ -14,18 +18,30 @@ public class LeanTweenTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        //LeanTween.moveX(gameObject, endPoint.position.x, 3).setEaseInOutQuad().setLoopPingPong();
-        LeanTween.moveY(gameObject, 4, 0.5f).setEaseLinear().setLoopPingPong();
+        animator = GetComponent<Animator>();
+        LeanTween.moveX(gameObject, endPoint.position.x, 3).setEaseLinear().setLoopPingPong();
+        LeanTween.moveY(gameObject, 4, 0.5f).setEaseInOutSine().setLoopPingPong();
     }
 
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.smoothDeltaTime;
-        float t = elapsedTime / desiredTime;
-
-        transform.position = Vector3.Lerp(originPoint.position, endPoint.position, t);
-        //transform.localScale = Vector3.Lerp(transform.localScale.z, transform.localScale.z / 2, t);
+        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        animator.Play("ending squash and stretch");
+        Debug.Log("enter");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        animator.Play("default");
+        Debug.Log("exit");
+    }
+
+
+
+
 }
